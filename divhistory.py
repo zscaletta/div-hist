@@ -26,4 +26,6 @@ def divtable_to_df(resultsetobj):
 def get_dividend_history(ticker_symbol):
     data = retrieve_divtable(ticker_symbol)
     df = divtable_to_df(data)
+    df = df.set_index(pd.DatetimeIndex(df['ExDivDate']))
+    df = df.drop('ExDivDate', 1)
     return df
